@@ -12,5 +12,7 @@ public:
 	std::string getStatus();
 	void setStatus(bool);
 	Tiquete(int);
+	bool verificarEstado();
+	void asignarNumeroAsiento(int);
 	Tiquete();
 };

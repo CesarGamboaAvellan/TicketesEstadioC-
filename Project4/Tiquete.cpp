@@ -13,3 +13,9 @@ void Tiquete::setStatus(bool isSold) {
 		status = "X";
 	};
 }
+bool Tiquete::verificarEstado() {
+	return (status == "X");
+}
+void Tiquete::asignarNumeroAsiento(int numeroAsiento) {
+	status = "["+std::to_string(numeroAsiento)+"]";
+}
