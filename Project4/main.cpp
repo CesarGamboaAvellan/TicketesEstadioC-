@@ -5,8 +5,6 @@ int main() {
 	int selectedOption = 0;
 	int* selectedOptionPointer = &selectedOption;
 	Menu newMenu;
-	while (selectedOption != 4) {
-		newMenu.loadMenu(selectedOptionPointer);
-	}
+	newMenu.loop(selectedOptionPointer);
 	return 0;
 }
