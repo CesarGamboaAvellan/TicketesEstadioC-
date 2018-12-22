@@ -1,5 +1,12 @@
 #include <iostream>
+#include "Menu.h";
 
 int main() {
-	std::cout << "Seems to be working" << std::endl;
+	int selectedOption = 0;
+	int* selectedOptionPointer = &selectedOption;
+	Menu newMenu;
+	while (selectedOption != 4) {
+		newMenu.loadMenu(selectedOptionPointer);
+	}
+	return 0;
 }
