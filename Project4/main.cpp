@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Menu.h";
 #include "Tiquete.h"
+#include "GestionTiquetes.h"
 
 int main() {
 	// Instanciar el puntero de tipo Tiquete
@@ -27,6 +28,7 @@ int main() {
 			std::cout << std::endl << std::endl;
 	}
 		
-
+	GestionTiquetes test;
+	test.cargarMenu();
 	return 0;
 }

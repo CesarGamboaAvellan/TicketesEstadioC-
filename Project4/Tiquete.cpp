@@ -16,6 +16,9 @@ void Tiquete::setStatus(bool isSold) {
 bool Tiquete::verificarEstado() {
 	return (status == "X");
 }
+// Asignar numero de asiento, para que el usuario
+// pueda elegir cual comprar
+
 void Tiquete::asignarNumeroAsiento(int numeroAsiento) {
 	status = "["+std::to_string(numeroAsiento)+"]";
 }
