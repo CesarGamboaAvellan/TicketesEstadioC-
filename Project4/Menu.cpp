@@ -6,6 +6,7 @@
 #include "Administracion.h"
 
 
+
 void Menu::loadMenu(int* option) {
 	/*system("CLS");*/
 	std::cout << "Bienvenido al sistema de compra de tiquetes. "<<std::endl;
@@ -22,18 +23,31 @@ void Menu::loop(int * selectedOptionPointer) {
 	Tiquete **ptrGimnasioA;
 	Tiquete **ptrGimnasioB;
 	Tiquete **ptrGimnasioC;
-	int fil = 50;
-	int col = 40;
+	// DEFINIMOS LAS FILAS  Y COLUMNAS PARA ESPACIOS EN EL GIMNASIO A 2000 espacios
+	constexpr int FILAS_GIMNASIO_A = 50;
+	constexpr int COLUMNAS_GIMNASIO_A = 40;
+	// DEFINIMOS LAS FILAS  Y COLUMNAS PARA ESPACIOS EN EL GIMNASIO B 1000 espacios
+	constexpr int FILAS_GIMNASIO_B = 40;
+	constexpr int COLUMNAS_GIMNASIO_B = 25;
+	// DEFINIMOS LAS FILAS  Y COLUMNAS PARA ESPACIOS EN EL GIMNASIO C 500 espacios
+	constexpr int FILAS_GIMNASIO_C = 25;
+	constexpr int COLUMNAS_GIMNASIO_C = 20;
 	// Creacion de un array de punteros
 	// se crean los tres distintos lugares
 	// con sus respectivos tiquetes
-	ptrGimnasioA = new Tiquete*[fil];
-	ptrGimnasioB = new Tiquete*[fil];
-	ptrGimnasioC = new Tiquete*[fil];
+	ptrGimnasioA = new Tiquete*[FILAS_GIMNASIO_A];
+	ptrGimnasioB = new Tiquete*[FILAS_GIMNASIO_B];
+	ptrGimnasioC = new Tiquete*[FILAS_GIMNASIO_C];
 
-	for (int i = 0; i < fil; ++i)
-		ptrGimnasioA[i] = new Tiquete[col];
-
+	// LLenamos las matrices con sus respectivos asientos
+	for (int i = 0; i < FILAS_GIMNASIO_A; ++i)
+		ptrGimnasioA[i] = new Tiquete[COLUMNAS_GIMNASIO_A];
+	for (int i = 0; i < FILAS_GIMNASIO_B; ++i)
+		ptrGimnasioB[i] = new Tiquete[COLUMNAS_GIMNASIO_B];
+	for (int i = 0; i < FILAS_GIMNASIO_C; ++i)
+		ptrGimnasioC[i] = new Tiquete[COLUMNAS_GIMNASIO_C];
+	// creacion de un punteto que almacena la opcion seleccionada del menu
+	// y llama la funcion loadMenu que setea el valor de la opcion seleccionada a travez del puntero
 	while (*selectedOptionPointer != 4) {
 		loadMenu(selectedOptionPointer);
 		if (*selectedOptionPointer == 1) {
@@ -69,9 +83,9 @@ void Menu::loop(int * selectedOptionPointer) {
 			std::cout << "3. Dia 3. Gimnasio C";
 			std::cin >> diaDelConcierto;
 			if (diaDelConcierto == 1) {
-				for (int i = 0; i < fil; ++i) {
+				for (int i = 0; i < FILAS_GIMNASIO_A; ++i) {
 					std::cout << "Fila: " << i << "  ";
-					for (int j = 0; j < col; ++j) {
+					for (int j = 0; j < COLUMNAS_GIMNASIO_A; ++j) {
 						bool checkIfSold = ptrGimnasioA[i][j].verificarEstado();
 						if (!checkIfSold) {
 							ptrGimnasioA[i][j].asignarNumeroAsiento(j);
@@ -82,9 +96,9 @@ void Menu::loop(int * selectedOptionPointer) {
 				}
 			}
 			if (diaDelConcierto == 2) {
-				for (int i = 0; i < fil; ++i) {
+				for (int i = 0; i < FILAS_GIMNASIO_B; ++i) {
 					std::cout << "Fila: " << i << "  ";
-					for (int j = 0; j < col; ++j) {
+					for (int j = 0; j < COLUMNAS_GIMNASIO_B; ++j) {
 						bool checkIfSold = ptrGimnasioB[i][j].verificarEstado();
 						if (!checkIfSold) {
 							ptrGimnasioB[i][j].asignarNumeroAsiento(j);
@@ -95,9 +109,9 @@ void Menu::loop(int * selectedOptionPointer) {
 				}
 			}
 			if (diaDelConcierto == 3) {
-				for (int i = 0; i < fil; ++i) {
+				for (int i = 0; i < FILAS_GIMNASIO_C; ++i) {
 					std::cout << "Fila: " << i << "  ";
-					for (int j = 0; j < col; ++j) {
+					for (int j = 0; j < COLUMNAS_GIMNASIO_C; ++j) {
 						bool checkIfSold = ptrGimnasioC[i][j].verificarEstado();
 						if (!checkIfSold) {
 							ptrGimnasioC[i][j].asignarNumeroAsiento(j);
@@ -124,9 +138,19 @@ void Menu::loop(int * selectedOptionPointer) {
 					double precio;
 					std::cout << "Por favor, ingrese el nuevo precio de los tiquetes" << std::endl;
 					std::cin >> precio;
-					for (int i = 0; i < fil; ++i) {
-						for (int j = 0; j < col; ++j) {
+					for (int i = 0; i < FILAS_GIMNASIO_A; ++i) {
+						for (int j = 0; j < COLUMNAS_GIMNASIO_A; ++j) {
 							sesionAdministracion.cambiarPrecioTiquetes(&ptrGimnasioA[i][j], precio);
+						}
+					}
+					for (int i = 0; i < FILAS_GIMNASIO_B; ++i) {
+						for (int j = 0; j < COLUMNAS_GIMNASIO_B; ++j) {
+							sesionAdministracion.cambiarPrecioTiquetes(&ptrGimnasioB[i][j], precio);
+						}
+					}
+					for (int i = 0; i < FILAS_GIMNASIO_C; ++i) {
+						for (int j = 0; j < COLUMNAS_GIMNASIO_C; ++j) {
+							sesionAdministracion.cambiarPrecioTiquetes(&ptrGimnasioC[i][j], precio);
 						}
 					}
 					std::cout << "El precio de los tiquetes ha sido cambiado, gracias." << std::endl;
@@ -135,9 +159,19 @@ void Menu::loop(int * selectedOptionPointer) {
 					std::string nuevaFecha;
 					std::cout << "Por favor ingrese la fecha en que inician los conciertos" << std::endl;
 					std::cin >> nuevaFecha;
-					for (int i = 0; i < fil; ++i) {
-						for (int j = 0; j < col; ++j) {
+					for (int i = 0; i < FILAS_GIMNASIO_A; ++i) {
+						for (int j = 0; j < COLUMNAS_GIMNASIO_A; ++j) {
 							sesionAdministracion.cambiarFechadeLaFuncion(&ptrGimnasioA[i][j], nuevaFecha);
+						}
+					}
+					for (int i = 0; i < FILAS_GIMNASIO_B; ++i) {
+						for (int j = 0; j < COLUMNAS_GIMNASIO_B; ++j) {
+							sesionAdministracion.cambiarFechadeLaFuncion(&ptrGimnasioB[i][j], nuevaFecha);
+						}
+					}
+					for (int i = 0; i < FILAS_GIMNASIO_C; ++i) {
+						for (int j = 0; j < COLUMNAS_GIMNASIO_C; ++j) {
+							sesionAdministracion.cambiarFechadeLaFuncion(&ptrGimnasioC[i][j], nuevaFecha);
 						}
 					}
 					std::cout << "Se ha cambiado la fecha en que inician los conciertos" << std::endl;
@@ -146,9 +180,19 @@ void Menu::loop(int * selectedOptionPointer) {
 					std::string nuevoLugar;
 					std::cout << "Ingrese el lugar donde se llevaran a cabo los conciertos" << std::endl;
 					std::cin >> nuevoLugar;
-					for (int i = 0; i < fil; ++i) {
-						for (int j = 0; j < col; ++j) {
+					for (int i = 0; i < FILAS_GIMNASIO_A; ++i) {
+						for (int j = 0; j < COLUMNAS_GIMNASIO_A; ++j) {
 							sesionAdministracion.cambiarLugar(&ptrGimnasioA[i][j], nuevoLugar);
+						}
+					}
+					for (int i = 0; i < FILAS_GIMNASIO_C; ++i) {
+						for (int j = 0; j < COLUMNAS_GIMNASIO_C; ++j) {
+							sesionAdministracion.cambiarLugar(&ptrGimnasioC[i][j], nuevoLugar);
+						}
+					}
+					for (int i = 0; i < FILAS_GIMNASIO_B; ++i) {
+						for (int j = 0; j < COLUMNAS_GIMNASIO_B; ++j) {
+							sesionAdministracion.cambiarLugar(&ptrGimnasioB[i][j], nuevoLugar);
 						}
 					}
 					std::cout << "Se ha cambiado la fecha en que inician los conciertos" << std::endl;
