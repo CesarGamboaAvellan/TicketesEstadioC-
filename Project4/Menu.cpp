@@ -7,7 +7,7 @@
 
 
 
-void Menu::loadMenu(int* option) {
+void Menu::loadMenu(char* option) {
 	/*system("CLS");*/
 	std::cout << "Bienvenido al sistema de compra de tiquetes. "<<std::endl;
 	std::cout << "Por favor seleccione una opcion: " << std::endl;
@@ -15,11 +15,28 @@ void Menu::loadMenu(int* option) {
 	std::cout << "2. Ver asientos disponibles " << std::endl;
 	std::cout << "3. Cambiar precios(Admin Zone) " << std::endl;
 	std::cout << "4. Salir " << std::endl;
-	int seleccion;
-	std::cin>>seleccion;
-	*option = seleccion;
+	char seleccion;
+	std::cin >> seleccion;
+	// VALIDACION: validar que el dato ingresado sea tipo char
+	// si no es char, setea el puntero con el valor generico
+	if ((std::string)typeid(seleccion).name() == "char") {
+		*option = seleccion;
+	}
+	else {
+		*option = '0';
+	}
 }
-void Menu::loop(int * selectedOptionPointer) {
+bool Menu::maximoLimiteDeCompra(int* numero) {
+	// si el numero de compra es mayor a 5, retorna valor false
+	// y setea el valor en cero
+	// para que el siguiente usuario pueda realizar una compra
+	if (*numero > 5) {
+		*numero = 0;
+		return false;
+	}
+	else return true;
+}
+void Menu::loop(char* selectedOptionPointer) {
 	Tiquete **ptrGimnasioA;
 	Tiquete **ptrGimnasioB;
 	Tiquete **ptrGimnasioC;
@@ -48,9 +65,13 @@ void Menu::loop(int * selectedOptionPointer) {
 		ptrGimnasioC[i] = new Tiquete[COLUMNAS_GIMNASIO_C];
 	// creacion de un punteto que almacena la opcion seleccionada del menu
 	// y llama la funcion loadMenu que setea el valor de la opcion seleccionada a travez del puntero
-	while (*selectedOptionPointer != 4) {
+	// si el valor ingresado es distinto de 4, repite el ciclo
+	while (*selectedOptionPointer != '4') {
+		int compraNumero = 0;
+		int* compraNumeroPointer = &compraNumero;
 		loadMenu(selectedOptionPointer);
-		if (*selectedOptionPointer == 1) {
+		bool validarLimiteDeCompra = maximoLimiteDeCompra(compraNumeroPointer);
+		if (*selectedOptionPointer == '1' && validarLimiteDeCompra) {
 			int numFila;
 			int numAsiento;
 			int diaYLugarDelConcierto;
@@ -74,8 +95,9 @@ void Menu::loop(int * selectedOptionPointer) {
 			}
 			// mostrar calculos de precio aca. 
 			std::cout << "Gracias por la compra, el campo ha sido asignado" << std::endl;
+			compraNumero++;
 		}
-		if (*selectedOptionPointer == 2) {
+		if (*selectedOptionPointer == '2') {
 			int diaDelConcierto;
 			std::cout << "Indique el dia que desea ver espacios disponibles" << std::endl;
 			std::cout << "1. Dia 1. Gimnasio A\n";
@@ -124,7 +146,7 @@ void Menu::loop(int * selectedOptionPointer) {
 		}
 		// Si se entra a la zona de administracion, se puede setear el precio de los tiquetes
 		// para ingresar, la contrase;a es admin
-		if (*selectedOptionPointer == 3) {
+		if (*selectedOptionPointer == '3') {
 			std::string password = "admin";
 			std::string tempPassword;
 			std::cout << "Por favor ingrese la contrase;a de  administrador";

@@ -4,7 +4,7 @@
 
 GestionTiquetes::GestionTiquetes() {}
 void GestionTiquetes::cargarMenu() {
-	int selectedOption = 0;
-	int *selectedOptionPointer = &selectedOption;
+	char selectedOption = '0';
+	char *selectedOptionPointer = &selectedOption;
 	loop(selectedOptionPointer);
 }

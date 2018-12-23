@@ -2,6 +2,7 @@
 
 class Menu {
 public:
-	void loadMenu(int* option);
-	void loop(int * option);
+	void loadMenu(char* option);
+	void loop(char * option);
+	bool maximoLimiteDeCompra(int*);
 };
