@@ -6,6 +6,7 @@ public:
 	GestionTiquetes();
 	// metodo void, perteneciente a la clase menu, inicia el menu
 	void cargarMenu();
+	// nos aseguramos q se ingresen valores correctos
 	bool validacionFilasYColumnas(int,int,int,int);
 	void imprimirErrorDeCompra();
 	void imprimirCompraCompletada(bool);

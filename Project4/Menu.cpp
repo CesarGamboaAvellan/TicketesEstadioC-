@@ -6,7 +6,7 @@
 #include "Tiquete.h"
 #include "Administracion.h"
 
-
+/// metodo q limpia la memoria dinamica 
 void Menu::limpiarMemoria(Tiquete** tiquetePorBorrar, int fil) {
 	for (int i = 0; i < fil; i++) {
 		delete[] tiquetePorBorrar[i];
@@ -106,6 +106,7 @@ void Menu::loop(char* selectedOptionPointer) {
 			// verifica si el asiento deseado es VIP
 			// returna true si es el caso
 			isVIP = nuevaGestion.esTiqueteVIP(numFila);
+			// opcion 1, gimnasio A, 2, gimnasio B, y 3, gimnasio C
 			if (diaYLugarDelConcierto == '1') {
 				if (nuevaGestion.validacionFilasYColumnas(numAsiento, numAsiento, FILAS_GIMNASIO_A, COLUMNAS_GIMNASIO_A)) {
 					// Esta funcion recibe el precio segun el gimnasio y si es VIP

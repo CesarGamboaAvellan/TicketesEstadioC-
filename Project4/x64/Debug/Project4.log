@@ -1,6 +1,4 @@
-﻿  Administracion.cpp
-c:\users\cesar\documents\una\project4\project4\administracion.cpp(2): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-  GestionTiquetes.cpp
+﻿  GestionTiquetes.cpp
   Menu.cpp
   Tiquete.cpp
 c:\users\cesar\documents\una\project4\project4\tiquete.cpp(1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
