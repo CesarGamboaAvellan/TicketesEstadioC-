@@ -13,6 +13,9 @@ void Tiquete::setStatus(bool isSold) {
 		status = "X";
 	};
 }
+void Tiquete::setPrecio(double precio) {
+	costoDelTiquete = precio;
+}
 bool Tiquete::verificarEstado() {
 	return (status == "X");
 }
@@ -21,4 +24,10 @@ bool Tiquete::verificarEstado() {
 
 void Tiquete::asignarNumeroAsiento(int numeroAsiento) {
 	status = "["+std::to_string(numeroAsiento)+"]";
+}
+void Tiquete::mostrarInformacionDelTiquete() {
+	std::cout << costoDelTiquete << std::endl;
+	std::cout << costoDelTiquete<<std::endl;
+	std::cout << tipoDeTiquete << std::endl;
+	std::cout << status << std::endl;
 }

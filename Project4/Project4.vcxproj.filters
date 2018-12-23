@@ -27,6 +27,9 @@
     <ClCompile Include="GestionTiquetes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Administracion.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Menu.h">
@@ -36,6 +39,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GestionTiquetes.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Administracion.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

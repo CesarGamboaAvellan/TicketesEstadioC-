@@ -5,6 +5,7 @@ private:
 	std::string time;
 	double costoImpresion;
 	std::string tipoDeTiquete;
+	double costoDelTiquete;
 	// declarar variable global impuesto venta
 	std::string status = "[_]";
 	int identificador;
@@ -14,5 +15,7 @@ public:
 	Tiquete(int);
 	bool verificarEstado();
 	void asignarNumeroAsiento(int);
+	void setPrecio(double);
+	void mostrarInformacionDelTiquete();
 	Tiquete();
 };

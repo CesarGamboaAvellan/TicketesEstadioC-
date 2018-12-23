@@ -3,6 +3,7 @@
 #include "Menu.h"
 #include "GestionTiquetes.h"
 #include "Tiquete.h"
+#include "Administracion.h"
 
 
 void Menu::loadMenu(int* option) {
@@ -53,8 +54,31 @@ void Menu::loop(int * selectedOptionPointer) {
 				std::cout << std::endl << std::endl;
 			}
 		}
+		// Si se entra a la zona de administracion, se puede setear el precio de los tiquetes
+		// para ingresar, la contrase;a es admin
 		if (*selectedOptionPointer == 3) {
-			std::cout << "vos sos admin?" << std::endl;
+			std::string password = "admin";
+			std::string tempPassword;
+			std::cout << "Por favor ingrese la contrase;a de  administrador";
+			std::cin >> tempPassword;
+			if (tempPassword == password) {
+				Administracion sesionAdministracion;
+				int opcion;
+				sesionAdministracion.adminMenu();
+				std::cin >> opcion;
+				std::cout << "Mostrando opcion: "<<opcion << std::endl;
+				double precio;
+				std::string horaDeLaFuncion;
+				std::cout << "Bienvenido a la zona de administrador" << std::endl;
+				std::cout << "Por favor, ingrese el nuevo precio de los tiquetes" << std::endl;
+				std::cin >> precio;
+				for (int i = 0; i < fil; ++i) {
+					for (int j = 0; j < col; ++j) {
+						sesionAdministracion.cambiarPrecioTiquetes(&ptrM[i][j], precio);
+					}
+				}
+				std::cout << "El precio de los tiquetes ha sido cambiado, gracias."<<std::endl;
+			}
 		}
 	}
 }
