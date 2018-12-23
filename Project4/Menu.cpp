@@ -19,39 +19,93 @@ void Menu::loadMenu(int* option) {
 	*option = seleccion;
 }
 void Menu::loop(int * selectedOptionPointer) {
-	Tiquete **ptrM;
+	Tiquete **ptrGimnasioA;
+	Tiquete **ptrGimnasioB;
+	Tiquete **ptrGimnasioC;
 	int fil = 50;
 	int col = 40;
 	// Creacion de un array de punteros
-	ptrM = new Tiquete*[fil];
+	// se crean los tres distintos lugares
+	// con sus respectivos tiquetes
+	ptrGimnasioA = new Tiquete*[fil];
+	ptrGimnasioB = new Tiquete*[fil];
+	ptrGimnasioC = new Tiquete*[fil];
 
 	for (int i = 0; i < fil; ++i)
-		ptrM[i] = new Tiquete[col];
+		ptrGimnasioA[i] = new Tiquete[col];
 
 	while (*selectedOptionPointer != 4) {
 		loadMenu(selectedOptionPointer);
 		if (*selectedOptionPointer == 1) {
 			int numFila;
 			int numAsiento;
+			int diaYLugarDelConcierto;
+			std::cout << "Para que dia desea comprar el tiquete?" << std::endl;
+			std::cout << "1. Dia 1. Gimnasio A\n";
+			std::cout << "2. Dia 2. Gimnasio B \n";
+			std::cout << "3. Dia 3. Gimnasio C";
+			std::cin >> diaYLugarDelConcierto;
 			std::cout << "En que numero de fila desea estar? " << std::endl;
 			std::cin >> numFila;
 			std::cout << "Digite el numero de asiento:  " << std::endl;
 			std::cin >> numAsiento;
-			ptrM[numFila][numAsiento].setStatus(true);
+			if (diaYLugarDelConcierto == 1) {
+				ptrGimnasioA[numFila][numAsiento].setStatus(true);
+			}
+			if (diaYLugarDelConcierto == 2) {
+				ptrGimnasioB[numFila][numAsiento].setStatus(true);
+			}
+			if (diaYLugarDelConcierto == 3) {
+				ptrGimnasioC[numFila][numAsiento].setStatus(true);
+			}
 			// mostrar calculos de precio aca. 
 			std::cout << "Gracias por la compra, el campo ha sido asignado" << std::endl;
 		}
 		if (*selectedOptionPointer == 2) {
-			for (int i = 0; i < fil; ++i) {
-				std::cout << "Fila: " << i << "  ";
-				for (int j = 0; j < col; ++j) {
-					bool checkIfSold = ptrM[i][j].verificarEstado();
-					if (!checkIfSold) {
-						ptrM[i][j].asignarNumeroAsiento(j);
+			int diaDelConcierto;
+			std::cout << "Indique el dia que desea ver espacios disponibles" << std::endl;
+			std::cout << "1. Dia 1. Gimnasio A\n";
+			std::cout << "2. Dia 2. Gimnasio B \n";
+			std::cout << "3. Dia 3. Gimnasio C";
+			std::cin >> diaDelConcierto;
+			if (diaDelConcierto == 1) {
+				for (int i = 0; i < fil; ++i) {
+					std::cout << "Fila: " << i << "  ";
+					for (int j = 0; j < col; ++j) {
+						bool checkIfSold = ptrGimnasioA[i][j].verificarEstado();
+						if (!checkIfSold) {
+							ptrGimnasioA[i][j].asignarNumeroAsiento(j);
+						}
+						std::cout << ptrGimnasioA[i][j].getStatus() << " ";
 					}
-					std::cout << ptrM[i][j].getStatus() << " ";
+					std::cout << std::endl << std::endl;
 				}
-				std::cout << std::endl << std::endl;
+			}
+			if (diaDelConcierto == 2) {
+				for (int i = 0; i < fil; ++i) {
+					std::cout << "Fila: " << i << "  ";
+					for (int j = 0; j < col; ++j) {
+						bool checkIfSold = ptrGimnasioB[i][j].verificarEstado();
+						if (!checkIfSold) {
+							ptrGimnasioB[i][j].asignarNumeroAsiento(j);
+						}
+						std::cout << ptrGimnasioB[i][j].getStatus() << " ";
+					}
+					std::cout << std::endl << std::endl;
+				}
+			}
+			if (diaDelConcierto == 3) {
+				for (int i = 0; i < fil; ++i) {
+					std::cout << "Fila: " << i << "  ";
+					for (int j = 0; j < col; ++j) {
+						bool checkIfSold = ptrGimnasioC[i][j].verificarEstado();
+						if (!checkIfSold) {
+							ptrGimnasioC[i][j].asignarNumeroAsiento(j);
+						}
+						std::cout << ptrGimnasioC[i][j].getStatus() << " ";
+					}
+					std::cout << std::endl << std::endl;
+				}
 			}
 		}
 		// Si se entra a la zona de administracion, se puede setear el precio de los tiquetes
@@ -72,7 +126,7 @@ void Menu::loop(int * selectedOptionPointer) {
 					std::cin >> precio;
 					for (int i = 0; i < fil; ++i) {
 						for (int j = 0; j < col; ++j) {
-							sesionAdministracion.cambiarPrecioTiquetes(&ptrM[i][j], precio);
+							sesionAdministracion.cambiarPrecioTiquetes(&ptrGimnasioA[i][j], precio);
 						}
 					}
 					std::cout << "El precio de los tiquetes ha sido cambiado, gracias." << std::endl;
@@ -83,24 +137,22 @@ void Menu::loop(int * selectedOptionPointer) {
 					std::cin >> nuevaFecha;
 					for (int i = 0; i < fil; ++i) {
 						for (int j = 0; j < col; ++j) {
-							sesionAdministracion.cambiarFechadeLaFuncion(&ptrM[i][j], nuevaFecha);
+							sesionAdministracion.cambiarFechadeLaFuncion(&ptrGimnasioA[i][j], nuevaFecha);
 						}
 					}
 					std::cout << "Se ha cambiado la fecha en que inician los conciertos" << std::endl;
 				}
 				if (opcion == 3) {
-					std::string nuevaFecha;
+					std::string nuevoLugar;
 					std::cout << "Ingrese el lugar donde se llevaran a cabo los conciertos" << std::endl;
-					std::cin >> nuevaFecha;
+					std::cin >> nuevoLugar;
 					for (int i = 0; i < fil; ++i) {
 						for (int j = 0; j < col; ++j) {
-							sesionAdministracion.cambiarFechadeLaFuncion(&ptrM[i][j], nuevaFecha);
+							sesionAdministracion.cambiarLugar(&ptrGimnasioA[i][j], nuevoLugar);
 						}
 					}
 					std::cout << "Se ha cambiado la fecha en que inician los conciertos" << std::endl;
-				}
-				std::string horaDeLaFuncion;
-				
+				}	
 			}
 		}
 	}
