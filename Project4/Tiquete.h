@@ -3,6 +3,7 @@
 class Tiquete {
 private:
 	std::string time;
+	std::string lugar;
 	double costoImpresion;
 	std::string tipoDeTiquete;
 	double costoDelTiquete;
@@ -16,6 +17,8 @@ public:
 	bool verificarEstado();
 	void asignarNumeroAsiento(int);
 	void setPrecio(double);
+	void setFecha(std::string);
+	void setLugar(std::string);
 	void mostrarInformacionDelTiquete();
 	Tiquete();
 };

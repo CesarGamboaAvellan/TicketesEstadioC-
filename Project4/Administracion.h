@@ -4,6 +4,6 @@ class Administracion: Tiquete {
 public:
 	void cambiarPrecioTiquetes(Tiquete* tiquete, double precio);
 	void adminMenu();
-	/*void cambiarFechadeLaFuncion();
-	void cambiarLugar();*/
+	void cambiarFechadeLaFuncion(Tiquete* tiquete, std::string);
+	void cambiarLugar(Tiquete* tiquete, std::string);
 };

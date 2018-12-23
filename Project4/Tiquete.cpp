@@ -25,6 +25,12 @@ bool Tiquete::verificarEstado() {
 void Tiquete::asignarNumeroAsiento(int numeroAsiento) {
 	status = "["+std::to_string(numeroAsiento)+"]";
 }
+void Tiquete::setFecha(std::string fecha) {
+	time = fecha;
+}
+void Tiquete::setLugar(std::string lugarConcierto) {
+	lugar = lugarConcierto;
+}
 void Tiquete::mostrarInformacionDelTiquete() {
 	std::cout << costoDelTiquete << std::endl;
 	std::cout << costoDelTiquete<<std::endl;

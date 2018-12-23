@@ -66,18 +66,41 @@ void Menu::loop(int * selectedOptionPointer) {
 				int opcion;
 				sesionAdministracion.adminMenu();
 				std::cin >> opcion;
-				std::cout << "Mostrando opcion: "<<opcion << std::endl;
-				double precio;
-				std::string horaDeLaFuncion;
-				std::cout << "Bienvenido a la zona de administrador" << std::endl;
-				std::cout << "Por favor, ingrese el nuevo precio de los tiquetes" << std::endl;
-				std::cin >> precio;
-				for (int i = 0; i < fil; ++i) {
-					for (int j = 0; j < col; ++j) {
-						sesionAdministracion.cambiarPrecioTiquetes(&ptrM[i][j], precio);
+				if (opcion == 1) {
+					double precio;
+					std::cout << "Por favor, ingrese el nuevo precio de los tiquetes" << std::endl;
+					std::cin >> precio;
+					for (int i = 0; i < fil; ++i) {
+						for (int j = 0; j < col; ++j) {
+							sesionAdministracion.cambiarPrecioTiquetes(&ptrM[i][j], precio);
+						}
 					}
+					std::cout << "El precio de los tiquetes ha sido cambiado, gracias." << std::endl;
 				}
-				std::cout << "El precio de los tiquetes ha sido cambiado, gracias."<<std::endl;
+				if (opcion == 2) {
+					std::string nuevaFecha;
+					std::cout << "Por favor ingrese la fecha en que inician los conciertos" << std::endl;
+					std::cin >> nuevaFecha;
+					for (int i = 0; i < fil; ++i) {
+						for (int j = 0; j < col; ++j) {
+							sesionAdministracion.cambiarFechadeLaFuncion(&ptrM[i][j], nuevaFecha);
+						}
+					}
+					std::cout << "Se ha cambiado la fecha en que inician los conciertos" << std::endl;
+				}
+				if (opcion == 3) {
+					std::string nuevaFecha;
+					std::cout << "Ingrese el lugar donde se llevaran a cabo los conciertos" << std::endl;
+					std::cin >> nuevaFecha;
+					for (int i = 0; i < fil; ++i) {
+						for (int j = 0; j < col; ++j) {
+							sesionAdministracion.cambiarFechadeLaFuncion(&ptrM[i][j], nuevaFecha);
+						}
+					}
+					std::cout << "Se ha cambiado la fecha en que inician los conciertos" << std::endl;
+				}
+				std::string horaDeLaFuncion;
+				
 			}
 		}
 	}
