@@ -11,11 +11,9 @@ private:
 	double costoDelTiquete = 2000;
 	// simbolo para asiento disponible, en vez del _, se mostrara el numero de asiento
 	std::string status = "[_]";
-	int identificador;
 public:
 	std::string getStatus();
 	void setStatus(bool);
-	Tiquete(int);
 	bool verificarEstado();
 	void asignarNumeroAsiento(int);
 	void setPrecio(double);

@@ -27,7 +27,7 @@ void GestionTiquetes::imprimirCompraCompletada(bool isCompleted) {
 }
 // Verifica si el tiquete es VIP, basado en la posicion de la fila
 bool GestionTiquetes::esTiqueteVIP(int numFila) {
-	return numFila >= 20;
+	return numFila <= 20;
 }
 // Calcular el precio total del tiquete
 // si el bool pasado es true, se agrega el 50% extra del costo
