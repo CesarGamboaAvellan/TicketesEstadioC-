@@ -9,4 +9,8 @@ public:
 	bool validacionFilasYColumnas(int,int,int,int);
 	void imprimirErrorDeCompra();
 	void imprimirCompraCompletada(bool);
+	// determina si VIP es true or false
+	bool esTiqueteVIP(int);
+	// calcula el precio del tiquete, si el bool es true, agrega el 50% extra
+	double precioTotalDelTiquete(double, bool);
 };

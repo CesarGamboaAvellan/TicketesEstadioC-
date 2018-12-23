@@ -1,5 +1,6 @@
 #include <iostream>
 #include <functional>  
+#include <iomanip>   
 #include "Menu.h"
 #include "GestionTiquetes.h"
 #include "Tiquete.h"
@@ -8,17 +9,21 @@
 
 
 void Menu::loadMenu(char* option) {
-	/*system("CLS");*/
-	std::cout << "Bienvenido al sistema de compra de tiquetes. "<<std::endl;
-	std::cout << "Por favor seleccione una opcion: " << std::endl;
-	std::cout << "1. Comprar tiquetes " << std::endl;
-	std::cout << "2. Ver asientos disponibles " << std::endl;
-	std::cout << "3. Cambiar precios(Admin Zone) " << std::endl;
-	std::cout << "4. Salir " << std::endl;
+	// Menu principal
+	std::cout << std::setw(50)<< "_________________________________________________________"  <<std::endl;
+	std::cout << std::setw(50)<< "|  Bienvenido al sistema de compra de tiquetes Navidenos |"<<std::endl;
+	std::cout << std::setw(50) <<"_________________________________________________________" << std::endl;
+	std::cout << std::setw(50) << "Por favor seleccione una opcion: " << std::endl;
+	std::cout << std::setw(39) << "1. Comprar tiquetes " << std::endl;
+	std::cout << std::setw(47) << "2. Ver asientos disponibles " << std::endl;
+	std::cout << std::setw(44) << "3. Zona de administracion" << std::endl;
+	std::cout << std::setw(28) << "4. Salir " << std::endl;
 	char seleccion;
 	std::cin >> seleccion;
 	// VALIDACION: validar que el dato ingresado sea tipo char
 	// si no es char, setea el puntero con el valor generico
+	// se limpia la consola despues de que el usuario ingresa un valor
+	system("CLS");
 	if ((std::string)typeid(seleccion).name() == "char") {
 		*option = seleccion;
 	}
@@ -76,6 +81,8 @@ void Menu::loop(char* selectedOptionPointer) {
 			int numFila;
 			int numAsiento;
 			bool isCompleted = false;
+			double precioTotal = 0;
+			bool isVIP = false;
 			char diaYLugarDelConcierto;
 			std::cout << "Para que dia desea comprar el tiquete?" << std::endl;
 			std::cout << "1. Dia 1. Gimnasio A\n";
@@ -86,18 +93,27 @@ void Menu::loop(char* selectedOptionPointer) {
 			std::cin >> numFila;
 			std::cout << "Digite el numero de asiento:  " << std::endl;
 			std::cin >> numAsiento;
+			// verifica si el asiento deseado es VIP
+			// returna true si es el caso
+			isVIP = nuevaGestion.esTiqueteVIP(numFila);
 			if (diaYLugarDelConcierto == '1') {
 				if (nuevaGestion.validacionFilasYColumnas(numAsiento, numAsiento, FILAS_GIMNASIO_A, COLUMNAS_GIMNASIO_A)) {
+					// Esta funcion recibe el precio segun el gimnasio y si es VIP
+					precioTotal = nuevaGestion.precioTotalDelTiquete(ptrGimnasioA[numFila][numAsiento].getPrecio(), isVIP);
 					ptrGimnasioA[numFila][numAsiento].setStatus(true);
+					std::cout << "El precio del tiquete es: " << precioTotal << std::endl;
 					isCompleted = true;
 				}
+				// muestra en caso de error
 				else {
 					nuevaGestion.imprimirErrorDeCompra();
 				}
 			}
 			if (diaYLugarDelConcierto == '2') {
 				if (nuevaGestion.validacionFilasYColumnas(numAsiento, numAsiento, FILAS_GIMNASIO_B, COLUMNAS_GIMNASIO_B)) {
+					precioTotal = nuevaGestion.precioTotalDelTiquete(ptrGimnasioB[numFila][numAsiento].getPrecio(), isVIP);
 					ptrGimnasioB[numFila][numAsiento].setStatus(true);
+					std::cout << "El precio del tiquete es: " << precioTotal << std::endl;
 					isCompleted = true;
 				}
 				else {
@@ -106,7 +122,9 @@ void Menu::loop(char* selectedOptionPointer) {
 			}
 			if (diaYLugarDelConcierto == '3') {
 				if (nuevaGestion.validacionFilasYColumnas(numAsiento, numAsiento, FILAS_GIMNASIO_C, COLUMNAS_GIMNASIO_C)) {
+					precioTotal = nuevaGestion.precioTotalDelTiquete(ptrGimnasioC[numFila][numAsiento].getPrecio(), isVIP);
 					ptrGimnasioC[numFila][numAsiento].setStatus(true);
+					std::cout << "El precio del tiquete es: " << precioTotal << std::endl;
 					isCompleted = true;
 				}
 				else {
@@ -168,7 +186,7 @@ void Menu::loop(char* selectedOptionPointer) {
 					}
 				}
 				// mostrar error si la opcion ingresada no es 1,2,3
-				else {
+				else if((diaDelConcierto != '3')&&((diaDelConcierto != '2'))&&((diaDelConcierto != '1'))) {
 					std::cout << "Opcion ingresada no valida" << std::endl;
 				}
 			}

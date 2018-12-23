@@ -37,3 +37,6 @@ void Tiquete::mostrarInformacionDelTiquete() {
 	std::cout << tipoDeTiquete << std::endl;
 	std::cout << status << std::endl;
 }
+double Tiquete::getPrecio() {
+	return costoDelTiquete;
+}
