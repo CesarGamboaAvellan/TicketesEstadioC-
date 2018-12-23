@@ -7,7 +7,12 @@
 #include "Administracion.h"
 
 
-
+void Menu::limpiarMemoria(Tiquete** tiquetePorBorrar, int fil) {
+	for (int i = 0; i < fil; i++) {
+		delete[] tiquetePorBorrar[i];
+	}
+	delete tiquetePorBorrar;
+}
 void Menu::loadMenu(char* option) {
 	// Menu principal
 	std::cout << std::setw(50)<< "_________________________________________________________"  <<std::endl;
@@ -60,7 +65,12 @@ void Menu::loop(char* selectedOptionPointer) {
 	ptrGimnasioA = new Tiquete*[FILAS_GIMNASIO_A];
 	ptrGimnasioB = new Tiquete*[FILAS_GIMNASIO_B];
 	ptrGimnasioC = new Tiquete*[FILAS_GIMNASIO_C];
-
+	// si el pointer opcion es igual a 4, se limpia la memoria
+	if (*selectedOptionPointer == '4') {
+		limpiarMemoria(ptrGimnasioA, FILAS_GIMNASIO_A);
+		limpiarMemoria(ptrGimnasioB, FILAS_GIMNASIO_B);
+		limpiarMemoria(ptrGimnasioC, FILAS_GIMNASIO_C);
+	}
 	// LLenamos las matrices con sus respectivos asientos
 	for (int i = 0; i < FILAS_GIMNASIO_A; ++i)
 		ptrGimnasioA[i] = new Tiquete[COLUMNAS_GIMNASIO_A];

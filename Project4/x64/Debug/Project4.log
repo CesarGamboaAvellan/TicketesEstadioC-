@@ -1,2 +1,6 @@
-﻿  Menu.cpp
+﻿  GestionTiquetes.cpp
+  Menu.cpp
+  main.cpp
+c:\users\cesar\documents\una\project4\project4\main.cpp(2): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+  Generating Code...
   Project4.vcxproj -> C:\Users\Cesar\Documents\UNA\Project4\x64\Debug\Project4.exe
