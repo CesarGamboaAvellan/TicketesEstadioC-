@@ -1,6 +1,8 @@
 #include <iostream>
 #include <functional>  
 #include "Menu.h"
+#include "GestionTiquetes.h"
+#include "Tiquete.h"
 
 
 void Menu::loadMenu(int* option) {
@@ -16,13 +18,40 @@ void Menu::loadMenu(int* option) {
 	*option = seleccion;
 }
 void Menu::loop(int * selectedOptionPointer) {
+	Tiquete **ptrM;
+	int fil = 50;
+	int col = 40;
+	// Creacion de un array de punteros
+	ptrM = new Tiquete*[fil];
+
+	for (int i = 0; i < fil; ++i)
+		ptrM[i] = new Tiquete[col];
+
 	while (*selectedOptionPointer != 4) {
 		loadMenu(selectedOptionPointer);
 		if (*selectedOptionPointer == 1) {
-			std::cout << "Dale loco vamos a comprar tiquetes!" << std::endl;
+			int numFila;
+			int numAsiento;
+			std::cout << "En que numero de fila desea estar? " << std::endl;
+			std::cin >> numFila;
+			std::cout << "Digite el numero de asiento:  " << std::endl;
+			std::cin >> numAsiento;
+			ptrM[numFila][numAsiento].setStatus(true);
+			// mostrar calculos de precio aca. 
+			std::cout << "Gracias por la compra, el campo ha sido asignado" << std::endl;
 		}
 		if (*selectedOptionPointer == 2) {
-			std::cout << "queres ver los asientos loco" << std::endl;
+			for (int i = 0; i < fil; ++i) {
+				std::cout << "Fila: " << i << "  ";
+				for (int j = 0; j < col; ++j) {
+					bool checkIfSold = ptrM[i][j].verificarEstado();
+					if (!checkIfSold) {
+						ptrM[i][j].asignarNumeroAsiento(j);
+					}
+					std::cout << ptrM[i][j].getStatus() << " ";
+				}
+				std::cout << std::endl << std::endl;
+			}
 		}
 		if (*selectedOptionPointer == 3) {
 			std::cout << "vos sos admin?" << std::endl;

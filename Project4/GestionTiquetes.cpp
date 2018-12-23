@@ -1,4 +1,6 @@
+#include <iostream>
 #include "GestionTiquetes.h"
+#include "Tiquete.h"
 
 GestionTiquetes::GestionTiquetes() {}
 void GestionTiquetes::cargarMenu() {
